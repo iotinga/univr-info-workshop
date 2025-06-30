@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "ms-vscode.cpptools-extension-pack",
+        "xaver.clang-format",
+        "jbenden.c-cpp-flylint",
+        "espressif.esp-idf-extension",
+        "charliermarsh.ruff",
+        "vadimcn.vscode-lldb"
+    ]
+}

@@ -1,0 +1,57 @@
+{
+  "C_Cpp.intelliSenseEngine": "default",
+  "[c]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "never"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "c-cpp-flylint.cppcheck.enable": true,
+  "c-cpp-flylint.flexelint.enable": false,
+  "c-cpp-flylint.flawfinder.enable": false,
+  "c-cpp-flylint.lizard.enable": false,
+  "c-cpp-flylint.cppcheck.addons": [
+    "misra"
+  ],
+  "c-cpp-flylint.cppcheck.extraArgs": [
+    "--quiet",
+    "--addon=misra.json"
+  ],
+  "c-cpp-flylint.clang.includePaths": [
+    "main/"
+  ],
+  "c-cpp-flylint.cppcheck.includePaths": [
+    "main/"
+  ],
+  "c-cpp-flylint.excludeFromWorkspacePaths": [
+    "esp-idf"
+  ],
+  "idf.pythonInstallPath": "/usr/local/bin/python3",
+  "idf.flashType": "UART",
+  "idf.espIdfPath": "${workspaceFolder}/esp-idf",
+  "idf.toolsPath": "~/.espressif",
+  "idf.port": "/dev/tty.usbmodem141401",
+  "files.associations": {
+    "*.env": "properties",
+    "task.h": "c"
+  },
+  "idf.openOcdConfigs": [
+    "board/esp32s3-builtin.cfg"
+  ],
+  "idf.customExtraVars": {
+    "OPENOCD_SCRIPTS": "~/.espressif/tools/openocd-esp32/v0.12.0-esp32-20230921/openocd-esp32/share/openocd/scripts",
+    "ESP_ROM_ELF_DIR": "~/.espressif/tools/esp-rom-elfs/20230320/",
+    "IDF_TARGET": "esp32s3"
+  },
+  "clangd.path": "~/.espressif/tools/esp-clang/esp-18.1.2_20240912/esp-clang/bin/clangd",
+  "clangd.arguments": [
+    "--background-index",
+    "--query-driver=~/.espressif/tools/xtensa-esp-elf/esp-14.2.0_20241119/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc",
+    "--compile-commands-dir=${workspaceFolder}/build"
+  ]
+}

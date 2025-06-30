@@ -1,0 +1,45 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Eclipse CDT GDB Adapter",
+      "type": "gdbtarget",
+      "request": "attach"
+    },
+    {
+      "name": "Launch",
+      "type": "espidf",
+      "request": "launch"
+    },
+    {
+      "name": "Debug con LLDB (macOS)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build-emulator/ProjectTemplateEmu",
+      "cwd": "${workspaceFolder}",
+    },
+    {
+      "name": "Emulator Debug (GDB)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build-emulator/ProjectTemplateEmu",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "miDebuggerPath": "/usr/local/bin/gdb", // Adjust the path to gdb if necessary
+      "logging": {
+        "engineLogging": true
+      }
+    }
+  ]
+}
