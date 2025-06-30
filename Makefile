@@ -26,8 +26,7 @@ help: # Show this helper
 
 prepare: # Prepare ESP-IDF environment: install required tools and Python packages
 	@echo "🔧 Installing ESP-IDF tools and Python requirements..."
-	@cd $(IDF_PATH) && ./install.sh
-	@python3 -m pip install -r $(IDF_PATH)/requirements.txt
+	@cd $(IDF_PATH) && ./install.sh $(TARGET)
 
 build: # Compile the firmware
 	@echo "🔧 Building firmware..."
