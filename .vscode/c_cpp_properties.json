@@ -12,6 +12,10 @@
         "${workspaceFolder}/main/src",
         "${workspaceFolder}/**"
       ],
+      "defines": [
+          "DEVICE",
+          "VERSION"
+      ],
       "browse": {
         "path": [
           "${config:idf.espIdfPath}/components",

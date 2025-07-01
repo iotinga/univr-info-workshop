@@ -171,14 +171,3 @@ Also see the list of [contributors](https://github.com/your/project/contributors
 Provide proper credits, shout-outs, and honorable mentions here. Also provide links to relevant repositories, blog posts, or contributors worth mentioning.
 
 **[Back to top](#table-of-contents)**
-
-Per avviare una sessione con ESP32-S3 via JTAG USB integrato:
-
-```
-openocd -f board/esp32s3-builtin.cfg
-```
-
-Poi puoi connettere GDB al debugger via:
-```
-xtensa-esp32s3-elf-gdb build/your_app.elf
-```

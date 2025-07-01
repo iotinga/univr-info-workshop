@@ -16,7 +16,7 @@ list(APPEND INCLUDE_DIRS
     ${PROJECT_INCLUDE_DIRS}
 )
 
-idf_component_register(SRCS ${SOURCES} INCLUDE_DIRS ${INCLUDE_DIRS})
+idf_component_register(SRCS ${SOURCES} INCLUDE_DIRS ${INCLUDE_DIRS} REQUIRES nvs_flash esp_wifi lwip driver led_strip)
 
 message("Configuring component target: ${COMPONENT_TARGET}")
 target_compile_definitions(${COMPONENT_TARGET} PRIVATE
