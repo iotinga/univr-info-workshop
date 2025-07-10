@@ -8,11 +8,6 @@
 
 #include "core/error.h"
 
-/**
- * \file wifi.h
- * Driver for the Wi-Fi interface
- */
-
 enum {
     /** Length of a MAC address */
     MAC_ADDRESS_LENGTH = 6,
@@ -131,8 +126,8 @@ typedef enum {
 /**
  * Initialize the Wi-Fi driver
  *
- * \param eventQueue queue where WifiEvents are sent
- * \returns the Wi-Fi handle if success, otherwise an error
+ * @param eventQueue queue where WifiEvents are sent
+ * @returns the Wi-Fi handle if success, otherwise an error
  */
 ErrorCode WiFi_Init(Queue *eventQueue);
 
@@ -140,14 +135,14 @@ ErrorCode WiFi_Init(Queue *eventQueue);
  * Starts the connection to the STA interface. Will keep trying to
  * connect as long as the interface is not stopped.
  *
- * \param network the network to connect to
- * \returns SUCCESS if connection started
+ * @param network the network to connect to
+ * @returns SUCCESS if connection started
  */
 ErrorCode WiFi_StartSta(const WiFiNetwork *network);
 
 /**
  * Stops the connection with the STA interface;
  *
- * \returns SUCCESS if the connection is stopped
+ * @returns SUCCESS if the connection is stopped
  */
 ErrorCode WiFi_StopSta(void);

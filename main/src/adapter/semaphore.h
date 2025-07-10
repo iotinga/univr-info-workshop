@@ -1,8 +1,3 @@
-/**
- * @file semaphore.h
- * @brief This file manages binary semaphores on the firmware
- */
-
 #pragma once
 
 #include <stdint.h>
@@ -13,14 +8,14 @@
 typedef struct Semaphore Semaphore;
 
 /**
- * @brief Creates a new semaphore
+ * Creates a new semaphore
  *
  * @returns the semaphore handle
  */
 Semaphore *Semaphore_New(void);
 
 /**
- * @brief Take the specified semaphore
+ * Take the specified semaphore
  *
  * @param semaphore semaphore handle
  * @param timeoutMs how much to wait for the semaphore to be available
@@ -29,7 +24,7 @@ Semaphore *Semaphore_New(void);
 ErrorCode Semaphore_Take(Semaphore *semaphore, uint64_t timeoutMs);
 
 /**
- * @brief Give the specified semaphore
+ * Give the specified semaphore
  *
  * @param semaphore semaphore handle
  * @returns SUCCESS on success, otherwise ERROR_OS
@@ -37,7 +32,7 @@ ErrorCode Semaphore_Take(Semaphore *semaphore, uint64_t timeoutMs);
 ErrorCode Semaphore_Give(Semaphore *semaphore);
 
 /**
- * @brief Frees the specified semaphore
+ * Frees the specified semaphore
  *
  * @param semaphore semaphore handle
  */

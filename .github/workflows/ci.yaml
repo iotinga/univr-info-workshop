@@ -29,8 +29,8 @@ jobs:
         run: make prepare
       - name: Build firmware for ESP32-S3 
         run: make build TARGET=esp32s3
-      - name: Build firmware for Emulator
-        run: make build-emulator
+      - name: Run tests
+        run: make test
       - name: Get new version
         run: python3 scripts/ci/bump_version.py
         env:

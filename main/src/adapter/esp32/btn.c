@@ -31,7 +31,7 @@ ErrorCode Btn_Init(Queue *eventQueue)
     ctx.gpioEventQueue = (QueueHandle_t)eventQueue;
 
     gpio_config_t btn_conf = {
-        .intr_type = GPIO_INTR_NEGEDGE, // fronte di discesa (pressione)
+        .intr_type = GPIO_INTR_NEGEDGE,
         .mode = GPIO_MODE_INPUT,
         .pull_up_en = GPIO_PULLUP_ENABLE,
         .pull_down_en = GPIO_PULLDOWN_DISABLE,

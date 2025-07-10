@@ -19,7 +19,7 @@ define IDF_CMD
 . $(EXPORT_SCRIPT) && idf.py -B build -DIDF_TARGET=$(TARGET) $(1)
 endef
 
-.PHONY: build flash monitor menuconfig clean fullclean debug build-emulator
+.PHONY: build flash monitor menuconfig clean fullclean debug build-emulator test
 
 help: # Show this helper
 	@grep -E '^[a-zA-Z0-9 -]+:.*#'  Makefile | sort | while read -r l; do printf "\033[1;32m$$(echo $$l | cut -f 1 -d':')\033[00m:$$(echo $$l | cut -f 2- -d'#')\n"; done
@@ -51,11 +51,13 @@ menuconfig: # Launch menuconfig UI
 clean: # Clean the build directory
 	@echo "🧹 Cleaning build artifacts..."
 	@$(call IDF_CMD,clean)
+	@rm -rf build*
 
 
 fullclean: # Remove entire build folder including CMake cache
 	@echo "🔥 Performing full clean..."
 	@$(call IDF_CMD,fullclean)
+	@rm -rf build*
 
 
 build-emulator: # Build the emulator version of the firmware (native Unix build)
@@ -63,3 +65,10 @@ build-emulator: # Build the emulator version of the firmware (native Unix build)
 	@mkdir -p build-emulator
 	@cd build-emulator && cmake ../emulator
 	@cd build-emulator && make
+
+test: # Build and run tests (native Unix build)
+	@echo "🧪 Building tests in ./build-test..."
+	@mkdir -p build-test
+	@cd build-test && cmake ../test
+	@cd build-test && make
+	@cd build-test && LSAN_OPTIONS=detect_leaks=0 ctest --output-on-failure

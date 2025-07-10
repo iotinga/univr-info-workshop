@@ -73,12 +73,12 @@ void Service_Start(Service *service)
 
         if (service->taskStackSize == 0u)
         {
-            service->taskStackSize = SERVICE_DEFAULT_STACK_SIZE;
+            service->taskStackSize = TASK_DEFAULT_STACK_SIZE;
         }
 
         if (service->taskPriority == 0u)
         {
-            service->taskPriority = SERVICE_DEFAULT_PRIORITY;
+            service->taskPriority = TASK_DEFAULT_PRIORITY;
         }
 
         service->queue = Queue_New(SERVICE_QUEUE_SIZE, sizeof(ServiceEvent));

@@ -48,10 +48,5 @@ void Console_Printf(ConsoleCtx *ctx, const char *fmt, ...) __attribute__((format
 
 ErrorCode Console_RunCommand(ConsoleCtx *ctx, char *cmdLine);
 
-/**
- * @return true if need to receive more data, false if command reception is completed.
- */
-bool Console_StdioConsoleReceive(char ch);
-
 SERVICE_DECLARE(SERVICE_STDIO_CONSOLE);
 SERVICE_DECLARE(SERVICE_NETWORK_CONSOLE);

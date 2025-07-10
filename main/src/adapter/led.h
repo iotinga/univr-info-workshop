@@ -22,15 +22,14 @@ typedef struct {
 } RGBW;
 
 /**
- *
+ * Initialize the led module and hw to control the RGBW LED
  */
 ErrorCode Led_Init(void);
 
 /**
  * Sets the state of the RGBW leds
  *
- * \param driver driver instance
- * \param value rgbw value to set
- * \returns SUCCESS or ERROR_RESOURCE_NOT_AVAILABLE if driver not initialized or other failure code
+ * @param color RGBW value to set
+ * @returns SUCCESS or ERROR_RESOURCE_NOT_AVAILABLE if driver not initialized or other failure code
  */
 ErrorCode Led_SetLedColor(const RGBW *color);

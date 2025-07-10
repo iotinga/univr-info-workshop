@@ -72,10 +72,7 @@ typedef struct {
 #define EVENT_STOP    0xafad
 #define isTIMEOUT(e)  (e.type == EVENT_TIMEOUT)
 
-#define SERVICE_DEFAULT_STACK_SIZE (1024u)
-#define SERVICE_MAX_STACK_SIZE     (1024u * 4u)
-#define SERVICE_DEFAULT_PRIORITY   0
-#define SERVICE_QUEUE_SIZE         20u
+#define SERVICE_QUEUE_SIZE 20u
 
 /*
  * USAGE:

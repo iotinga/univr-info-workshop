@@ -1,173 +1,157 @@
-# Project Title
+# Workshop - Embedded firmware development
 
-Provide an introductory paragraph, describing:
+This demo project was developed for a course on professional embedded firmware development using the ESP32 platform. The firmware is modular, testable, and portable, with hardware abstraction layers for both ESP32 and POSIX environments (for PC testing or emulators).
 
-* What your project does
-* Why people should consider using your project
-* Link to project home page
+## Environment Setup
 
-## Table of Contents
+Follow these steps to get the project running locally for development and testing.
 
-- [Project Title](#project-title)
-  - [Table of Contents](#table-of-contents)
-  - [About the Project](#about-the-project)
-  - [Project Status](#project-status)
-  - [Getting Started](#getting-started)
-    - [Dependencies](#dependencies)
-    - [Getting the Source](#getting-the-source)
-    - [Building](#building)
-    - [Running Tests](#running-tests)
-      - [Other Tests](#other-tests)
-    - [Installation](#installation)
-    - [Usage](#usage)
-  - [Release Process](#release-process)
-    - [Versioning](#versioning)
-    - [Payload](#payload)
-  - [How to Get Help](#how-to-get-help)
-  - [Contributing](#contributing)
-  - [Further Reading](#further-reading)
-  - [License](#license)
-  - [Authors](#authors)
-  - [Acknowledgments](#acknowledgments)
+### Clone the repository
 
-## About the Project
+This project is hosted on GitHub. Clone it with all submodules:
 
-Here you can provide more details about the project
-* What features does your project provide?
-* Short motivation for the project? (Don't be too long winded)
-* Links to the project site
-
-```
-Show some example code to describe what your project does
-Show some of your APIs
+```sh
+git clone --recurse-submodules -j8 git@github.com:iotinga/univr-info-workshop.git
 ```
 
-**[Back to top](#table-of-contents)**
+> Note: `-j8` speeds up submodule fetching.
 
-## Project Status
+If the project is already cloned, synchronize submodules manually
 
-Show the build status if you have a CI server:
-
-[![Build Status](http://your-server:12345/job/badge/icon)](http://your-server/job/badge/icon/)
-
-Describe the current release and any notes about the current state of the project. Examples: currently compiles on your host machine, but is not cross-compiling for ARM, APIs are not set, feature not implemented, etc.
-
-**[Back to top](#table-of-contents)**
-
-## Getting Started
-
-This section should provide instructions for other developers to
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Dependencies
-
-Describe what software and libraries you will need to install in order to build and use this project. Provide details on how to resolve these dependencies.
-
-Remember: `git-lfs` is a dependency that developers will need to resolve before they can get started with a repository using LFS.
-
-```
-Examples should be included
+```sh
+git submodule update --init --recursive
 ```
 
-### Getting the Source
+### Setup ESP-IDF commands (without the VSCode extension)
 
-Include a link to your GitHub repository (you have no idea how people will find your code), and also a summary of how to clone.
+Navigate to the ESP-IDF directory (`./esp-idf/`) and run the installer:
 
-This project is [hosted on GitHub](https://github.com/embeddedartistry/embedded-resources). You can clone this project directly using this command:
-
-```
-git clone git@github.com:embeddedartistry/templates.git
+```sh
+./install.sh
 ```
 
-### Building
+> To switch SDK versions, run `install.sh` in the desired SDK directory.
 
-Instructions for how to build your project
+Activate the environment (when using a normal shell):
 
-```
-Examples should be included
-```
-
-### Running Tests
-
-Describe how to run unit tests for your project.
-
-```
-Examples should be included
+```sh
+. ./export.sh
 ```
 
-#### Other Tests
+> If using the VSCode extension terminal, this step is usually handled automatically.
 
-If you have formatting checks, coding style checks, or static analysis tests that must pass before changes will be considered, add a section for those and provide instructions
+### Install the ESP-IDF extension for VSCode (Optional)
 
-### Installation
+In the setup wizard, choose **"USE EXISTING SETUP"**.
 
-Instructions for how to install your project's build artifacts
+If previously configured, select **"Search ESP-IDF in system..."** and make sure:
 
+- SDK path is set to `${workspaceFolder}/esp-idf`
+- Tools directory is set to `${HOME}/.espressif`
+- Python interpreter is your system’s Python (e.g. `/opt/homebrew/bin/python` on macOS), **not** the virtualenv inside `.espressif`, to avoid persistent misconfiguration.
+
+### Setup IntelliSense, Linter and Formatter
+
+Follow the official ESP-IDF guide:
+
+https://github.com/espressif/vscode-esp-idf-extension/blob/master/docs/C_CPP_CONFIGURATION.md
+
+Use the **second configuration** (with `build-commands.json`) which requires a successful build.
+
+For a consistent coding style, install the recommended VSCode extensions listed in `.vscode/extensions.json`.
+
+Install `clang-format` for formatting:
+
+- On Linux:
+
+```sh
+sudo apt install clang-format
 ```
-Examples should be included
+
+- On macOS:
+
+```sh
+brew install clang-format
 ```
 
-### Usage
+### Select port interface (VSCode extension)
 
-Instructions for using your project. Ways to run the program, how to include it in another project, etc.
+VSCode Command Palette -> ESP-IDF: Select port to use (...)
+E.g: `/dev/cu.usbmodem1401/` or `/dev/tty.usbserial-1140`
+Then select the UART interface.
 
+### Select target device (VSCode extension)
+
+It should be already set in workspace settings ("idf.adapterTargetName": "esp32").
+
+VSCode Command Palette -> ESP-IDF: Set Espressif device target
+Then select `esp32`.
+
+### Open a shell with the ESP-IDF environment (VSCode extension)
+
+VSCode Command Palette -> ESP-IDF: Open ESP-IDF Terminal
+
+## Building the Project
+
+### Building for ESP32
+
+```sh
+make build
 ```
-Examples should be included
+
+## Building for Emulator (POSIX/Linux)
+
+```sh
+make build-emulator
 ```
 
-If your project provides an API, either provide details for usage in this document or link to the appropriate API reference documents
+> This builds and runs the POSIX target on a regular machine (no ESP32 required).
 
-**[Back to top](#table-of-contents)**
+## Flashing the firmware
 
-## Release Process
+Flash to connected ESP32 DevKit:
 
-Talk about the release process. How are releases made? What cadence? How to get new releases?
+```sh
+make flash
+```
 
-### Versioning
+## Monitor Serial Output
 
-This project uses [Semantic Versioning](http://semver.org/). For a list of available versions, see the [repository tag list](https://github.com/your/project/tags).
+```sh
+make monitor
+```
 
-### Payload
+## Testing
 
-**[Back to top](#table-of-contents)**
+There are two types of tests:
 
-## How to Get Help
+- **Unit Tests**: test isolated logic in modules; run on the POSIX target.
+- **Integration Tests**: verify interactions between components and with hardware; run on ESP32.
 
-Provide any instructions or contact information for users who need to get further help with your project.
+### Running Unit Tests (CMocka)
 
-## Contributing
+```sh
+make tests
+```
 
-Provide details about how people can contribute to your project. If you have a contributing guide, mention it here. e.g.:
+> Runs all CMocka tests found in the `test/` directory.
 
-We encourage public contributions! Please review [CONTRIBUTING.md](docs/CONTRIBUTING.md) for details on our code of conduct and development process.
+### Running Integration Tests (ESP32 via UART or QEMU)
 
-**[Back to top](#table-of-contents)**
+Use `pytest-embedded` to run integration tests on ESP32:
 
-## Further Reading
+```sh
+pytest integration_tests --target esp32
+```
 
-Provide links to other relevant documentation here
+## Clean Build Artifacts
 
-**[Back to top](#table-of-contents)**
+```sh
+make clean
+```
 
 ## License
 
-Copyright (c) 2021 Embedded Artistry LLC
+Copyright (c) 2025 IOTINGA S.r.l.
 
-This project is licensed under the XXXXXX License - see [LICENSE.md](LICENSE.md) file for details.
-
-**[Back to top](#table-of-contents)**
-
-## Authors
-
-* **[Phillip Johnston](https://github.com/phillipjohnston)** - *Initial work* - [Embedded Artistry](https://github.com/embeddedartistry)
-
-Also see the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-**[Back to top](#table-of-contents)**
-
-## Acknowledgments
-
-Provide proper credits, shout-outs, and honorable mentions here. Also provide links to relevant repositories, blog posts, or contributors worth mentioning.
-
-**[Back to top](#table-of-contents)**
+This project is released under the [MIT License](LICENSE) for academic and educational purposes.

@@ -35,11 +35,7 @@
   "idf.flashType": "UART",
   "idf.espIdfPath": "${workspaceFolder}/esp-idf",
   "idf.toolsPath": "~/.espressif",
-  "idf.port": "/dev/tty.usbmodem141401",
-  "files.associations": {
-    "*.env": "properties",
-    "task.h": "c"
-  },
+  "idf.port": "/dev/tty.usbmodem141201",
   "idf.openOcdConfigs": [
     "board/esp32s3-builtin.cfg"
   ],
